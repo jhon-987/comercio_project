@@ -1,0 +1,6 @@
+/* Utility classes */
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.col{flex:1}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow,0 6px 18px rgba(20,24,40,0.04));padding:12px}
+.text-muted{color:var(--muted)}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;color:var(--brand);font-weight:600}

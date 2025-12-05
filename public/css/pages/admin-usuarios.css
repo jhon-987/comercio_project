@@ -1,0 +1,175 @@
+/* =========================================
+   CONTENEDOR DE TABLA
+========================================= */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 12px;
+    background: #f9fafb; /* fondo claro */
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   TABLA DE USUARIOS
+========================================= */
+.tabla-usuarios {
+    width: 100%;
+    min-width: 900px; /* ancho mínimo aumentado */
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Columnas ajustadas */
+.tabla-usuarios col.col-id { width: 6%; }
+.tabla-usuarios col.col-nombre { width: 22%; }
+.tabla-usuarios col.col-email { width: 24%; }
+.tabla-usuarios col.col-rol { width: 10%; }
+.tabla-usuarios col.col-telefono { width: 12%; }
+/* Registro más ancho */
+.tabla-usuarios col.col-registro { width: 12%; } 
+.tabla-usuarios col.col-acciones { width: 16%; }
+
+/* Encabezado */
+.tabla-usuarios thead th {
+    background: #f3f4f6;
+    color: #111827;
+    font-weight: 700;
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.05);
+    font-size: 0.95rem;
+}
+
+/* Celdas */
+.tabla-usuarios tbody td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: normal;
+    word-break: break-word;
+    font-size: 0.92rem;
+    color: #1f2937;
+}
+
+/* Nombre y email alineados a la izquierda */
+.nombre-con-mini {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.usuario-nombre { font-weight: 600; color: #111827; }
+.usuario-email { font-weight: 400; font-size: 0.85rem; color: #6b7280; }
+
+/* Teléfono */
+.usuario-telefono { font-size: 0.9rem; color: #374151; }
+
+/* Botones de acciones */
+.usuario-acciones {
+    display: inline-flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.usuario-acciones .btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    transition: all 0.15s ease-in-out;
+}
+
+.usuario-acciones .btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.9);
+}
+
+/* Variantes de botones */
+.btn-warning { background: #f59e0b; color: #fff; }
+.btn-danger { background: #ef4444; color: #fff; }
+.btn-secondary { background: #6b7280; color: #fff; }
+
+/* Líneas verticales entre columnas */
+.tabla-usuarios td:nth-child(1), .tabla-usuarios th:nth-child(1),
+.tabla-usuarios td:nth-child(2), .tabla-usuarios th:nth-child(2),
+.tabla-usuarios td:nth-child(3), .tabla-usuarios th:nth-child(3),
+.tabla-usuarios td:nth-child(4), .tabla-usuarios th:nth-child(4),
+.tabla-usuarios td:nth-child(5), .tabla-usuarios th:nth-child(5),
+.tabla-usuarios td:nth-child(6), .tabla-usuarios th:nth-child(6) {
+    border-right: 1px solid #e5e7eb;
+}
+
+/* =========================================
+   RESPONSIVE: VERSION TIPO CARD
+========================================= */
+@media (max-width: 768px) {
+    .tabla-usuarios,
+    .tabla-usuarios thead,
+    .tabla-usuarios tbody,
+    .tabla-usuarios th,
+    .tabla-usuarios td,
+    .tabla-usuarios tr {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-usuarios thead { display: none; }
+
+    .tabla-usuarios tbody tr {
+        margin-bottom: 14px;
+        background: #fff;
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .tabla-usuarios tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        white-space: normal;
+    }
+
+    .tabla-usuarios tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        flex: 0 0 40%;
+        margin-right: 10px;
+        text-transform: capitalize;
+        font-size: 0.85rem;
+    }
+
+    .usuario-acciones {
+        justify-content: flex-start;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .usuario-acciones .btn .btn-text { display: none; }
+}
+
+/* Header sticky */
+.tabla-usuarios thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+}

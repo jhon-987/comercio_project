@@ -1,0 +1,111 @@
+/* Auth Registro Page */
+.registro-wrapper{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.registro-container{
+    width:100%;
+    max-width:480px;
+}
+
+.registro-card{
+    background:var(--surface);
+    border-radius:16px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    padding:32px;
+    animation:slideIn 0.3s ease;
+}
+
+@keyframes slideIn{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.registro-card h2{
+    color:var(--brand);
+    font-size:1.6rem;
+    margin:0 0 8px;
+    text-align:center;
+}
+
+.registro-card .subtitle{
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:24px;
+    font-size:0.95rem;
+}
+
+.registro-card .form-group{
+    margin-bottom:16px;
+}
+
+.registro-card label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    color:#111827;
+    font-size:0.95rem;
+}
+
+.registro-card input[type="text"],
+.registro-card input[type="email"],
+.registro-card input[type="password"]{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #e6e9ef;
+    border-radius:8px;
+    font-size:1rem;
+    transition:border-color 0.2s ease;
+}
+
+.registro-card input:focus{
+    outline:none;
+    border-color:var(--brand);
+    box-shadow:0 0 0 3px rgba(90, 103, 216, 0.1);
+}
+
+.registro-card .btn-registro{
+    width:100%;
+    background:linear-gradient(90deg, var(--brand), #3b82f6);
+    color:white;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top:8px;
+}
+
+.registro-card .btn-registro:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(90, 103, 216, 0.3);
+}
+
+.registro-card .registro-footer{
+    text-align:center;
+    margin-top:16px;
+    font-size:0.9rem;
+    color:var(--muted);
+}
+
+.registro-card .registro-footer a{
+    color:var(--brand);
+    font-weight:600;
+    text-decoration:none;
+    transition:opacity 0.2s ease;
+}
+
+.registro-card .registro-footer a:hover{
+    opacity:0.8;
+}
+
+@media (max-width:480px){
+    .registro-card{padding:24px}
+    .registro-card h2{font-size:1.4rem}
+}

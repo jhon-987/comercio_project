@@ -1,0 +1,164 @@
+/* =========================
+   Login Page - Solo tarjeta blanca
+========================= */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Fondo morado */
+}
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Tarjeta de login blanca */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff; /* Solo la tarjeta en blanco */
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    border: 1px solid #e5e7eb;
+    animation: slideIn 0.4s ease-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos dentro de la tarjeta */
+.login-card h1, .login-card h2 {
+    color: #111827; /* Texto negro */
+    font-size: 2rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.login-card .subtitle {
+    color: #4b5563; /* Gris oscuro */
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+/* Inputs */
+.login-card .form-group {
+    margin-bottom: 18px;
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #111827; /* Negro */
+    font-size: 0.95rem;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #111827; /* Texto negro */
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+.login-card input::placeholder {
+    color: #6b7280; /* Gris placeholder */
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+
+/* Botón login */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea, #764ba2); /* Botón morado */
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 12px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #111827; /* Negro */
+}
+
+.login-footer a {
+    color: #667eea; /* Morado para enlace */
+    font-weight: 600;
+    text-decoration: underline;
+    transition: all 0.25s ease;
+}
+
+.login-footer a:hover {
+    opacity: 0.8;
+}
+
+/* Alertas dentro de la tarjeta */
+.alert {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #059669;
+    border: 1px solid #059669;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 32px 24px;
+    }
+    .login-card h2 {
+        font-size: 1.6rem;
+    }
+    .btn-login {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}

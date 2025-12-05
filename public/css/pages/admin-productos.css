@@ -1,0 +1,246 @@
+/* =========================================
+   PRODUCTOS - VISTA EN CUADRÍCULA (compatibilidad)
+========================================= */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+}
+
+.producto-admin {
+    background: var(--surface);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.producto-admin h4 {
+    margin: 0 0 6px;
+}
+
+.producto-admin .meta {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+/* =========================================
+   PRODUCTOS - VISTA EN TABLA
+========================================= */
+/* Contenedor con scroll horizontal */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Tabla principal */
+.tabla-productos {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+    font-family: inherit;
+}
+
+/* Anchos de columna */
+.tabla-productos col.col-id { width: 7%; }
+.tabla-productos col.col-imagen-nombre { width: 45%; }
+.tabla-productos col.col-precio { width: 14%; }
+.tabla-productos col.col-stock { width: 10%; }
+.tabla-productos col.col-acciones { width: 24%; }
+
+/* Cabecera de tabla */
+.tabla-productos thead th {
+    background: var(--surface);
+    color: var(--brand);
+    font-weight: 700;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+/* Alineación de cabeceras */
+.tabla-productos thead th:nth-child(1),
+.tabla-productos thead th:nth-child(4),
+.tabla-productos thead th:nth-child(5),
+.tabla-productos thead th:nth-child(6) {
+    text-align: center;
+}
+
+/* Celdas del cuerpo */
+.tabla-productos tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    overflow: visible;
+    white-space: normal;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+
+/* Alineación de celdas */
+.tabla-productos tbody td:nth-child(1),
+.tabla-productos tbody td:nth-child(4),
+.tabla-productos tbody td:nth-child(5),
+.tabla-productos tbody td:nth-child(6) {
+    text-align: center;
+}
+
+/* Contenedor nombre + imagen */
+.nombre-con-mini {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+/* Imagen miniatura */
+.prod-miniatura {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Texto del nombre */
+.nombre-texto {
+    display: block;
+    min-width: 0;
+}
+
+.prod-nombre {
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Precio y stock */
+.td-precio {
+    color: #059669;
+    font-weight: 700;
+}
+
+.td-stock {
+    font-weight: 700;
+}
+
+/* Contenedor de acciones */
+.producto-acciones {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 120px;
+}
+
+/* Botones base */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: filter 0.2s ease;
+}
+
+.btn-warning { background: #f59e0b; }
+.btn-danger { background: #ef4444; }
+.btn-success { background: #16a34a; }
+
+.btn:hover {
+    filter: brightness(0.92);
+}
+
+/* Separadores verticales entre columnas */
+.tabla-productos th:nth-child(1),
+.tabla-productos td:nth-child(1),
+.tabla-productos th:nth-child(2),
+.tabla-productos td:nth-child(2),
+.tabla-productos th:nth-child(3),
+.tabla-productos td:nth-child(3),
+.tabla-productos th:nth-child(4),
+.tabla-productos td:nth-child(4),
+.tabla-productos th:nth-child(5),
+.tabla-productos td:nth-child(5),
+.tabla-productos th:nth-child(6),
+.tabla-productos td:nth-child(6) {
+    border-right: 2px solid #e1e1e1;
+}
+
+/* =========================================
+   VISTA RESPONSIVE
+========================================= */
+@media (max-width: 900px) {
+    .tabla-productos {
+        min-width: 0;
+        border: none;
+        box-shadow: none;
+    }
+    
+    .table-wrapper {
+        overflow-x: visible;
+    }
+    
+    .tabla-productos thead {
+        display: none;
+    }
+    
+    .tabla-productos tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: white;
+        border: 1px solid #e5e5e5;
+    }
+    
+    .tabla-productos tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    .tabla-productos tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #6b7280;
+        margin-right: 8px;
+        flex: 0 0 40%;
+    }
+    
+    .btn .btn-text {
+        display: none;
+    }
+    
+    .producto-acciones {
+        justify-content: flex-start;
+        margin-top: 6px;
+        min-width: 0;
+    }
+}

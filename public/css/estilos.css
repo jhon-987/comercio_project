@@ -1,0 +1,21 @@
+/* Archivo central de estilos — importa otras capas */
+@charset "utf-8";
+@import url('base.css');
+@import url('layout.css');
+@import url('utilities.css');
+@import url('components/navbar.css');
+@import url('components/navbar-admin.css');
+@import url('components/buttons.css');
+@import url('components/cards.css');
+@import url('components/forms.css');
+@import url('components/tables.css');
+
+/* Espacio para overrides globales */
+html,body{height:100%}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* Pequeñas utilidades globales */
+.text-center{text-align:center}
+.mt-2{margin-top:8px}
+.mt-4{margin-top:16px}
+.mb-4{margin-bottom:16px}

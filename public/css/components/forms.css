@@ -1,0 +1,4 @@
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+input[type="text"],input[type="number"],input[type="password"],textarea,select{padding:8px;border-radius:8px;border:1px solid #e6e9ef}
+label{font-weight:600;color:var(--muted);font-size:.95rem}
+.form-inline{display:flex;gap:8px;align-items:center}

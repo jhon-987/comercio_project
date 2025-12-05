@@ -1,0 +1,29 @@
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;padding:8px 12px;border-radius:8px;font-weight:600}
+.btn-primary{background:linear-gradient(90deg,var(--brand),#3b82f6);color:#fff}
+.btn-secondary{background:transparent;border:1px solid #e6e9ef;color:var(--muted);padding:7px 10px}
+.btn-success{background:linear-gradient(90deg,#10b981,#34d399);color:#fff}
+.btn-danger{background:#ef4444;color:#fff}
+.btn-sm{padding:6px 8px;font-size:0.9rem}
+/* Botones de acción */
+.action-btn {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  margin: 0 0.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+/* Variante editar / eliminar */
+.action-btn--edit { background: #e8f4ff; color: #0b66c3; border-color: #bcdcf8; }
+.action-btn--delete { background: #ffecec; color: #c02323; border-color: #f1bdbd; }
+
+/* Si necesitas compactar en pantallas pequeñas: apilar los botones */
+@media (max-width: 720px) {
+  .table td.actions { min-width: 140px; width: auto; }
+  .action-btn { display: block; width: 100%; margin: 0.25rem 0; }
+}
+

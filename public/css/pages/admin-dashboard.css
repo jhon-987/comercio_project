@@ -1,0 +1,6 @@
+.main-admin-content{padding:24px}
+.admin-menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card-admin{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:var(--shadow)}
+.card-admin h2{margin:0 0 8px;color:var(--brand)}
+.card-admin p{color:var(--muted)}
+.card-admin .btn{margin-top:12px}

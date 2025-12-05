@@ -1,0 +1,176 @@
+/* Navbar Styling - Main Navigation */
+
+.container-full-width {
+    width: 100%;
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    gap: 8px;
+}
+
+.nav-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: #f8fafc;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.nav-links li a:hover {
+    background: rgba(90, 103, 216, 0.2);
+    color: #e0e7ff;
+    transform: translateY(-1px);
+}
+
+.nav-links li a i {
+    font-size: 1rem;
+}
+
+/* Logout button - special styling */
+.nav-links li a[href*="logout"] {
+    color: #fca5a5;
+}
+
+.nav-links li a[href*="logout"]:hover {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fecaca;
+}
+
+/* Admin button - special styling */
+.btn-admin a {
+    background: linear-gradient(90deg, #7c3aed, #a855f7) !important;
+    color: white !important;
+}
+
+.btn-admin a:hover {
+    background: linear-gradient(90deg, #6d28d9, #9333ea) !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+/* Right-aligned items */
+.nav-links .btn-right {
+    margin-left: auto;
+}
+
+.nav-links .btn-right + li {
+    margin-left: 0;
+}
+
+/* Login/Register buttons styling */
+.nav-links li:last-child a {
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    color: #fca5a5;
+}
+
+.nav-links li:last-child a:hover {
+    background: rgba(255, 107, 107, 0.2);
+    border: 1px solid rgba(255, 107, 107, 0.5);
+    color: #fecaca;
+}
+
+.nav-links .btn-right a {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    color: white;
+    border: none;
+}
+
+.nav-links .btn-right a:hover {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Logo/Brand (si lo necesitas en el futuro) */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e0e7ff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-right: 24px;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    color: #f8fafc;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .nav-links li a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .nav-links li a i {
+        font-size: 0.9rem;
+    }
+
+    .nav-links .btn-right {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .container {
+        padding: 10px 8px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links li a {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+
+    /* Hide text on mobile, show only icons */
+    .nav-links li a span {
+        display: none;
+    }
+
+    .nav-links li a {
+        justify-content: center;
+        min-width: 36px;
+    }
+}

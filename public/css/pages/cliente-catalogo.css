@@ -1,0 +1,171 @@
+:root {
+    --bg: #f5f3ff;          /* Fondo general suave */
+    --card: #ffffff;        /* Tarjetas blancas */
+    --muted: #374151;       /* Texto secundario gris oscuro */
+    --accent: #10b981;      /* Verde principal */
+    --accent-2: #6366f1;    /* Morado para títulos y botones */
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg);
+    color: #111827;
+}
+
+/* Contenedor principal */
+.main-content {
+    max-width: 1100px;
+    margin: 36px auto;
+    padding: 20px;
+}
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+    color: var(--accent-2);
+    text-align: center;
+}
+
+/* Grid de productos */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* Tarjeta de producto */
+.producto-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+}
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* Detalle del producto */
+.producto-detalle h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #111827;
+}
+.producto-detalle .precio {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+/* Inputs inline */
+.form-group-inline {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.input-cantidad {
+    width: 70px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, var(--accent-2), #34d399);
+    color: #fff;
+}
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+.btn-danger:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Meta y footer de la tarjeta */
+.producto-card .meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Placeholder de imagen */
+.producto-card .thumb {
+    height: 120px;
+    background: linear-gradient(135deg,#eef2ff,#fff);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* Alertas */
+.alert {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+}
+.alert-info {
+    background: #f0f9ff;
+    border: 1px solid #dbeafe;
+    color: #0b6aff;
+}
+.alert-danger {
+    background: #fff0f0;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+/* Precio destacado */
+.precio {
+    background: #fef3c7;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* Links secundarios */
+a.btn-secondary {
+    background: transparent;
+    border: 1px solid #d1d5db;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+/* Ajustes responsive */
+@media (max-width: 520px) {
+    .main-content { padding: 12px; }
+    h1 { font-size: 1.4rem; }
+    .producto-card { min-height: auto; padding: 12px; }
+}
