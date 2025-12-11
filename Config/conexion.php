@@ -8,7 +8,7 @@ class Conexion {
     private $host = 'localhost';
     private $db_name = 'comercio_db'; // ¡Asegúrate que este nombre sea correcto!
     private $username = 'root';      // ¡AJUSTA TU USUARIO!
-    private $password = 'jhonpablo1';          // ¡AJUSTA TU CONTRASEÑA!
+    private $password = '';          // ¡AJUSTA TU CONTRASEÑA!
     private $conn;
 
     /**
