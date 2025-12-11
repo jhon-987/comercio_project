@@ -8,3 +8,7 @@ usar codifo: ADMIN_CODE_777
 para registro como admin
 
 para resgistro como cliente dejarlo en blanco
+
+# Tener instalado previamente compose
+# Instalar dependecias para factura
+composer require dompdf/dompdf

@@ -1,0 +1,49 @@
+@startuml DiagramaDeDespliegue_Final
+
+skinparam defaultFontName Arial
+
+' ==========================================================
+' 1. NODO CLIENTE
+' ==========================================================
+node "Dispositivo Cliente" as Client {
+    component "Navegador Web" as Browser
+}
+
+' ==========================================================
+' 2. NODO SERVIDOR WEB / APLICACIÓN
+' Contiene los módulos PHP y el entorno de ejecución.
+' ==========================================================
+node "Servidor Web / Aplicación" as WebServer {
+    
+    component "Entorno de Ejecución\n(Apache + PHP)" as Environment
+    
+    ' Artefactos de la Aplicación MVC (Complejidad Media)
+    component "Aplicación E-commerce" as App {
+        artifact "Módulo de Compras" as Compras
+        artifact "Módulo de Reportes" as Reports
+        artifact "Controladores/Vistas" as Core
+    }
+    
+    Environment -- App : ejecuta
+}
+
+' ==========================================================
+' 3. NODO SERVIDOR DE BASE DE DATOS
+' ==========================================================
+node "Servidor de Base de Datos" as DBServer {
+    database "Motor MySQL" as MySQL
+    artifact "Esquema Comercio" as Schema
+}
+
+' ==========================================================
+' 4. TIPOS DE CONEXIÓN
+' ==========================================================
+
+' Cliente <-> Servidor Web (Web Protocol)
+Client .[#blue].> WebServer : <<HTTP/HTTPS>>
+
+' Servidor Web <-> Servidor DB (Database Protocol)
+WebServer .[#red].> DBServer : <<Protocolo SQL>>
+App <--> MySQL : PDO/Driver
+
+@enduml

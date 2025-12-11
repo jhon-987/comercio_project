@@ -1,0 +1,40 @@
+@startuml Secuencia_FlujoAdminSimplificado
+title Flujo de Gestión del Administrador/Empleado
+
+actor Admin_Empleado as A
+participant "Sistema Core\n(Lógica y Persistencia)" as SC
+database "Base de Datos\n(DB)" as DB
+participant "Sistema de Archivos\n(FS)" as FS
+
+== Tarea 1: CRUD de Productos ==
+
+A -> SC: 1. Solicitar /productos/crear
+A -> SC: 2. POST /productos/crear (Datos, Imagen)
+
+SC -> FS: 3. Guardar archivo de imagen (Ej: move_uploaded_file)
+FS --> SC: 4. Ruta del archivo (Ej: /assets/img/imagen.jpg)
+
+SC -> DB: 5. INSERT INTO productos (Incluye la Ruta del archivo)
+DB --> SC: 6. Confirmación
+SC --> A: 7. Muestra éxito/error
+
+== Tarea 2: Actualización de Pedido ==
+
+A -> SC: 8. Solicitar /pedidos/lista
+SC -> DB: 9. SELECT pedidos
+DB --> SC: 10. Lista de Pedidos
+SC --> A: 11. Muestra lista
+
+A -> SC: 12. POST /pedidos/actualizarEstado (ID, Nuevo Estado)
+SC -> DB: 13. UPDATE pedidos SET estado = Nuevo_Estado
+DB --> SC: 14. Confirmación
+SC --> A: 15. Redireccionar
+
+== Tarea 3: Descarga de Factura ==
+A -> SC: 16. GET /descargarFactura (Pedido ID)
+SC -> DB: 17. Consultar detalles del pedido
+DB --> SC: 18. Datos para factura
+SC -> SC: 19. Generar Documento PDF (UC11)
+SC --> A: 20. Envía archivo PDF
+
+@enduml

@@ -1,7 +1,8 @@
 <?php
 /**
  * VISTA: /Vistas/admin/productos/crearProducto.php
- * REQUERIDA: $error
+ * CORREGIDO: Cambia el campo de imagen a 'file' para subida de archivos.
+ * REQUERIDA: $error, $categorias (lista de categorías)
  */
 include __DIR__ . '/../dashboard_menu.php';
 ?>
@@ -20,7 +21,7 @@ include __DIR__ . '/../dashboard_menu.php';
         
         <?php if (!empty($error)): ?> <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div> <?php endif; ?>
 
-        <form method="POST" action="<?php echo BASE_URL; ?>index.php?c=producto&a=crearproducto" enctype="multipart/form-data">
+        <form method="POST" action="<?php echo BASE_URL; ?>index.php?c=producto&a=crear" enctype="multipart/form-data">
             
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -30,6 +31,22 @@ include __DIR__ . '/../dashboard_menu.php';
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="categoria_id">Categoría:</label>
+                <select id="categoria_id" name="categoria_id" required>
+                    <option value="">-- Seleccione una Categoría --</option>
+                    <?php 
+                    if (!empty($categorias)):
+                        foreach ($categorias as $cat): ?>
+                            <option value="<?php echo htmlspecialchars($cat['id']); ?>">
+                                <?php echo htmlspecialchars($cat['nombre']); ?>
+                            </option>
+                        <?php endforeach;
+                    endif;
+                    ?>
+                </select>
             </div>
             
             <div class="form-group">
@@ -43,8 +60,9 @@ include __DIR__ . '/../dashboard_menu.php';
             </div>
             
             <div class="form-group">
-                <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*">
+                <label for="imagen">Imagen (Subir Archivo):</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*"> 
+                <small class="form-text text-muted">Dejar vacío para usar la imagen por defecto.</small>
             </div>
             
             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar Producto</button>

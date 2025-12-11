@@ -4,7 +4,8 @@
  * Propósito: Layout de navegación interna para TODAS las vistas de Admin.
  */
 $logueado = isset($_SESSION['usuario_id']);
-$nombre_usuario = $_SESSION['nombre'] ?? 'Administrador';
+// 🛑 CORRECCIÓN: Usar la clave correcta para el nombre
+$nombre_usuario = $_SESSION['usuario_nombre'] ?? 'Administrador';
 ?>
 <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/estilos.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">

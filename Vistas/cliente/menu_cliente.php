@@ -1,18 +1,28 @@
 <?php
 /**
  * VISTA: /Vistas/cliente/menu_cliente.php
+ * FINAL: Menú de navegación principal del cliente, incluyendo enlace a Mis Pedidos.
  */
 $logueado = isset($_SESSION['usuario_id']);
+// 🛑 CORRECCIÓN: Usar $_SESSION['rol'] que es la clave que usa AuthController
 $es_admin = $logueado && isset($_SESSION['rol']) && ($_SESSION['rol'] === 'admin' || $_SESSION['rol'] === 'empleado');
 ?>
 <div class="container-full-width">
     <nav class="navbar">
         <div class="container">
             <ul class="nav-links">
+                
                 <li><a href="<?php echo BASE_URL; ?>index.php?c=cliente&a=catalogo"><i class="fa fa-th-large"></i> Catálogo</a></li>
                 <li><a href="<?php echo BASE_URL; ?>index.php?c=cliente&a=carrito"><i class="fa fa-shopping-cart"></i> Carrito</a></li>
                 
                 <?php if ($logueado): ?>
+                    
+                    <li>
+                        <a href="<?php echo BASE_URL; ?>index.php?c=cliente&a=misPedidos">
+                            <i class="fa fa-box"></i> Mis Pedidos
+                        </a>
+                    </li>
+                    
                     <li><a href="<?php echo BASE_URL; ?>index.php?c=cliente&a=perfil"><i class="fa fa-user"></i> Perfil</a></li>
                     
                     <?php if ($es_admin): ?>

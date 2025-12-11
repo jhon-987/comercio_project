@@ -1,0 +1,51 @@
+@startuml Secuencia_FlujoClienteCompletoPago
+title Flujo Completo del Cliente
+
+actor Cliente as C
+participant "Navegador" as Nav
+participant "Sistema\n(Controladores/Modelos)" as SC
+participant "Pasarela de Pago" as PP
+database "Base de Datos(DB)" as DB
+
+== Fase 1: Búsqueda, Carrito y Stock ==
+
+C -> Nav: 1. Acceder al Catálogo
+Nav -> SC: 2. Solicitar /catalogo
+SC -> DB: 3. Obtener productos y stock
+DB --> SC: 4. Devuelve datos
+SC --> Nav: 5. Muestra Catálogo
+
+C -> Nav: 6. Añadir Producto (Validación de Stock)
+Nav -> SC: 7. POST /carrito/agregar (ID, Cantidad)
+SC -> SC: 8. Verificar Stock y Actualizar Carrito en Sesión
+SC --> Nav: 9. Redirecciona a Carrito (Éxito/Fallo de Stock)
+
+== Fase 2: Checkout y Pago ==
+
+Nav -> SC: 10. GET /carrito/checkout
+SC -> DB: 11. Obtener Datos del Perfil (Dirección, Nombre)
+SC --> Nav: 12. Muestra Formulario Checkout con Autocompletado
+
+C -> Nav: 13. Clic en Confirmar Pedido
+Nav -> SC: 14. POST /confirmarPedido (Datos, Tarjeta, Referencia)
+
+SC -> PP: 15. Enviar Datos de Pago (Simulación de Tarjeta/Yape)
+
+PP -> PP: 16. Validar Pago / Referencia (Simulado)
+
+alt Pago Aprobado
+    PP --> SC: 17a. Respuesta: Pago Aprobado / Referencia de Transacción
+    
+    SC -> DB: 18. **INICIO DE TRANSACCIÓN**
+    SC -> DB: 19. Registrar Pedido, Detalles, Referencia Pago
+    SC -> DB: 20. Reducción de Stock
+    SC -> DB: 21. **COMMIT / ROLLBACK**
+    SC -> SC: 22. Vaciar Carrito y Generar PDF (UC11)
+    SC --> Nav: 23a. Redirecciona a /misPedidos (Éxito)
+    
+else Pago Rechazado o Error de Referencia
+    PP --> SC: 17b. Respuesta: Pago Rechazado
+    SC --> Nav: 23b. Redirecciona a /carrito (Error de Pago)
+end
+
+@endumal

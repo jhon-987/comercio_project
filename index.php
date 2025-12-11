@@ -1,9 +1,12 @@
 <?php
 /**
  * Archivo: COMERCIO_PROJECT-MASTER/index.php
- * Final: Controlador Frontal Dinámico y Seguridad.
+ * Final: Controlador Frontal Dinámico y Seguridad Corregida.
  */
 session_start();
+
+// 🛑 AÑADIR ESTA LÍNEA AQUÍ (al principio de index.php)
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Configuración de errores para desarrollo
 ini_set('display_errors', 1);
@@ -16,8 +19,7 @@ $id          = $_GET['id'] ?? null;
 
 /*
  * BASE_URL: ruta base del proyecto.
- * Se calcula dinámicamente a partir de SCRIPT_NAME para soportar subdirectorios
- * (por ejemplo: '/comercio_project-master/'). Garantiza una barra final.
+ * Se calcula dinámicamente a partir de SCRIPT_NAME para soportar subdirectorios.
  */
 $basePath = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
 if ($basePath === '/' || $basePath === '.') {
@@ -30,12 +32,17 @@ define('BASE_URL', $basePath);
 // 2.3. Determinar si el controlador requiere autenticación de administrador.
 $es_modulo_admin = in_array(strtolower($controlador), ['admin', 'pedido', 'producto', 'usuario', 'empleado']);
 
-// --- VERIFICACIÓN DE SEGURIDAD (ADMIN) ---
+// --- VERIFICACIÓN DE SEGURIDAD (ADMIN/EMPLEADO) ---
 // Este bloque protege las rutas de CRUD de Pedidos, Productos, etc.
 if ($es_modulo_admin) {
-    // Si intenta acceder a un módulo de admin sin ser admin, redirigir al Login.
-    if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'admin') {
-        header('Location: ' . BASE_URL . 'index.php?c=auth&a=login&error=Acceso denegado. Debe iniciar sesión como administrador.');
+    
+    // 🛑 CORRECCIÓN: Verifica si el rol es 'admin' O 'empleado'.
+    // Esto resuelve el bloqueo si el AuthController redirige a un empleado al dashboard.
+    $rol_permitido = isset($_SESSION['rol']) && ($_SESSION['rol'] === 'admin' || $_SESSION['rol'] === 'empleado');
+    
+    // Si intenta acceder a un módulo de admin sin el rol o sin sesión, redirigir al Login.
+    if (!isset($_SESSION['usuario_id']) || !$rol_permitido) {
+        header('Location: ' . BASE_URL . 'index.php?c=auth&a=login&error=Acceso denegado. Debe iniciar sesión con un rol autorizado (Administrador/Empleado).');
         exit;
     }
 }

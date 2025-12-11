@@ -1,0 +1,83 @@
+@startuml CasosDeUso_Comercio
+
+' Establecer la dirección para mejor legibilidad
+left to right direction
+skinparam defaultFontName Arial
+
+' ==========================================================
+' 1. Definición de Actores (Roles)
+' ==========================================================
+actor Cliente
+actor Administrador
+actor Empleado
+
+' ==========================================================
+' 2. Definición del Contenedor (Sistema) y Casos de Uso
+' ==========================================================
+package "Plataforma de E-commerce" {
+
+    ' --- Casos de Uso Comunes ---
+    usecase UC1 as "Gestionar Autenticación"
+    usecase UC2 as "Ver Catálogo y Buscar Productos"
+    usecase UC3 as "Gestionar Perfil (Datos y Contraseña)"
+    
+    ' --- Casos de Uso del Cliente ---
+    usecase UC4 as "Gestionar Carrito (CRUD y Stock)"
+    usecase UC5 as "Finalizar Compra (Checkout y Pago)"
+    usecase UC6 as "Ver Historial de Pedidos"
+    
+    ' 🛑 CORRECCIÓN: Usar el alias como etiqueta interna para evitar conflictos
+    usecase Descargar as "Descargar Factura/Guía" 
+    
+    ' --- Casos de Uso del Admin/Empleado ---
+    usecase UC7 as "Gestionar Productos (CRUD e Imágenes)"
+    usecase UC8 as "Gestionar Categorías (CRUD)"
+    usecase UC9 as "Actualizar Estado de Pedidos"
+    usecase UC10 as "Gestionar Cuentas de Usuario (Solo Admin)"
+    
+    ' Tarea del Sistema
+    usecase GenerarPDF as "Generar Documento PDF de Pedido"
+    
+}
+
+' ==========================================================
+' 3. Relaciones entre Actores y Casos de Uso
+' ==========================================================
+
+' Cliente
+Cliente -- UC1
+Cliente -- UC2
+Cliente -- UC3
+Cliente -- UC4
+Cliente -- UC5
+Cliente -- UC6
+Cliente -- Descargar 
+
+' Administrador
+Administrador -- UC1
+Administrador -- UC7
+Administrador -- UC8
+Administrador -- UC9
+Administrador -- UC10
+Administrador -- Descargar
+
+' Empleado
+Empleado -- UC1
+Empleado -- UC7
+Empleado -- UC8
+Empleado -- UC9
+Empleado -- Descargar
+' ==========================================================
+' 4. Relaciones de Dependencia Lógica
+' ==========================================================
+
+' 1. Finalizar Compra incluye la generación de la factura.
+UC5 ..> GenerarPDF : <<include>>
+
+' 2. Descargar Factura incluye la generación (o la invoca si es 'on-demand').
+Descargar ..> GenerarPDF : <<include>>
+
+' 3. Gestionar Pedidos extiende el Historial del Cliente
+UC9 <.. UC6 : <<extend>> 
+
+@enduml

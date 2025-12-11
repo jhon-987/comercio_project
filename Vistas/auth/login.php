@@ -1,5 +1,9 @@
 <?php
-// VISTA: /Vistas/auth/login.php
+/**
+ * VISTA: /Vistas/auth/login.php
+ * Propósito: Muestra el formulario de inicio de sesión.
+ * REQUERIDA: $error, $mensaje (pasados por AuthController)
+ */
 include __DIR__ . '/../cliente/menu_cliente.php';
 ?>
 <!DOCTYPE html>
@@ -18,14 +22,13 @@ include __DIR__ . '/../cliente/menu_cliente.php';
         <p class="subtitle">Ingresa tus credenciales para continuar</p>
 
         <?php 
-        $msg = $error ?? $mensaje ?? null;
-        if (isset($_GET['m']) && !empty($_GET['m'])) {
-            $msg = htmlspecialchars($_GET['m']);
-            echo '<p class="alert alert-success">' . $msg . '</p>';
-        } else if ($msg) {
-            echo '<p class="alert alert-danger">' . htmlspecialchars($msg) . '</p>';
-        }
-        ?>
+        $msg_get = $_GET['m'] ?? null;
+        
+        if (isset($error) && $error): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+        <?php elseif ($msg_get): ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($msg_get); ?></div>
+        <?php endif; ?>
 
         <form method="POST" action="<?php echo BASE_URL; ?>index.php?c=auth&a=login">
             <div class="form-group">
@@ -38,7 +41,7 @@ include __DIR__ . '/../cliente/menu_cliente.php';
                 <input type="password" id="password" name="password" required placeholder="Contraseña">
             </div>
             
-            <button type="submit" class="btn-login">Entrar</button>
+            <button type="submit" class="btn btn-primary btn-login">Entrar</button>
         </form>
         
         <p class="login-footer">

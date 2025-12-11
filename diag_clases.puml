@@ -1,0 +1,86 @@
+@startuml DiagramaDeClases_Comercio
+' Establecer la dirección de las flechas
+hide circle
+skinparam classAttributeIconSize 0
+
+' Definición de Clases/Entidades
+class Usuario {
+    + id : INT
+    --
+    + nombre : VARCHAR
+    + email : VARCHAR
+    + password_hash : VARCHAR
+    + rol : ENUM
+    + direccion : TEXT
+    + telefono : VARCHAR
+}
+
+class Categoria {
+    + id : INT
+    --
+    + nombre : VARCHAR
+}
+
+class Producto {
+    + id : INT
+    --
+    + nombre : VARCHAR
+    + precio : DECIMAL
+    + stock : INT
+    + imagen_url : VARCHAR
+    + activo : BOOLEAN
+    + sku : VARCHAR
+}
+
+class Carrito {
+    + id : INT
+    --
+    + usuario_id : INT
+    + fecha_actualizacion : TIMESTAMP
+}
+
+class ItemCarrito {
+    + id : INT
+    --
+    + cantidad : INT
+}
+
+class Pedido {
+    + id : INT
+    --
+    + fecha_pedido : TIMESTAMP
+    + estado : ENUM
+    + total : DECIMAL
+    + direccion_envio : TEXT
+    + metodo_pago : VARCHAR
+}
+
+class DetallePedido {
+    + id : INT
+    --
+    + cantidad : INT
+    + precio_unitario : DECIMAL
+}
+
+' Relaciones
+
+' Usuario - Pedido
+Usuario "1" -- "0..*" Pedido : realiza
+' Pedido - DetallePedido
+Pedido "1" -- "1..*" DetallePedido : contiene
+' DetallePedido - Producto
+DetallePedido "1" -- "1" Producto : refiere
+
+' Producto - Categoria
+Categoria "1" -- "0..*" Producto : clasifica
+
+' Carrito - Usuario
+Usuario "1" -- "1" Carrito : posee
+
+' Carrito - ItemCarrito
+Carrito "1" -- "0..*" ItemCarrito : incluye
+
+' ItemCarrito - Producto
+ItemCarrito "1" -- "1" Producto : refiere
+
+@enduml

@@ -2,9 +2,16 @@
 /**
  * VISTA: /Vistas/auth/registro.php
  * Propósito: Muestra el formulario de registro.
+ * REQUERIDA: $error, $mensaje (pasados por AuthController)
  */
 // Incluye el menú del cliente
 include __DIR__ . '/../cliente/menu_cliente.php';
+
+// Variables para retener los datos en caso de error
+$old_nombre = $_POST['nombre'] ?? '';
+$old_email = $_POST['email'] ?? '';
+$old_telefono = $_POST['telefono'] ?? '';
+$old_admin_code = $_POST['admin_code'] ?? ''; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,17 +39,17 @@ include __DIR__ . '/../cliente/menu_cliente.php';
             
             <div class="form-group">
                 <label for="nombre">Nombre Completo:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($old_nombre); ?>" required>
             </div>
             
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($old_email); ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono">
+                <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($old_telefono); ?>">
             </div>
             
             <div class="form-group">
@@ -52,10 +59,10 @@ include __DIR__ . '/../cliente/menu_cliente.php';
             
             <div class="form-group">
                 <label for="admin_code">Código de Empleado (Opcional):</label>
-                <input type="text" id="admin_code" name="admin_code" placeholder="Código de autorización">
+                <input type="text" id="admin_code" name="admin_code" value="<?php echo htmlspecialchars($old_admin_code); ?>" placeholder="Código de autorización">
             </div>
             
-            <button type="submit" class="btn-registro">Registrarme</button>
+            <button type="submit" class="btn btn-primary btn-registro">Registrarme</button>
         </form>
         
         <p class="registro-footer">

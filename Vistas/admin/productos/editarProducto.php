@@ -1,7 +1,7 @@
 <?php
 /**
  * VISTA: /Vistas/admin/productos/editarProducto.php
- * REQUERIDA: $producto (datos del producto), $error
+ * REQUERIDA: $producto (datos del producto), $error, $categorias (lista de categorías)
  */
 include __DIR__ . '/../dashboard_menu.php';
 ?>
@@ -20,7 +20,7 @@ include __DIR__ . '/../dashboard_menu.php';
         
         <?php if (!empty($error)): ?> <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div> <?php endif; ?>
 
-        <form method="POST" action="<?php echo BASE_URL; ?>index.php?c=producto&a=editarproducto&id=<?php echo $producto['id']; ?>" enctype="multipart/form-data">
+        <form method="POST" action="<?php echo BASE_URL; ?>index.php?c=producto&a=editar&id=<?php echo $producto['id']; ?>" enctype="multipart/form-data">
             
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -30,6 +30,25 @@ include __DIR__ . '/../dashboard_menu.php';
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion"><?php echo htmlspecialchars($producto['descripcion']); ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="categoria_id">Categoría:</label>
+                <select id="categoria_id" name="categoria_id" required>
+                    <option value="">-- Seleccione una Categoría --</option>
+                    <?php 
+                    // Se asume que $categorias es pasado desde ProductoController->editar()
+                    if (!empty($categorias)):
+                        $current_cat_id = $producto['categoria_id'] ?? null;
+                        foreach ($categorias as $cat): ?>
+                            <option value="<?php echo htmlspecialchars($cat['id']); ?>"
+                                <?php echo ($current_cat_id == $cat['id']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($cat['nombre']); ?>
+                            </option>
+                        <?php endforeach;
+                    endif;
+                    ?>
+                </select>
             </div>
             
             <div class="form-group">
@@ -44,15 +63,14 @@ include __DIR__ . '/../dashboard_menu.php';
             
             <div class="form-group">
                 <label>Imagen Actual:</label><br>
-                <img src="<?php echo BASE_URL; ?>public/img/<?php echo htmlspecialchars($producto['imagen'] ?? 'default.jpg'); ?>" alt="Imagen Actual" width="100"><br>
+                <img src="<?php echo BASE_URL; ?>public/img/<?php echo htmlspecialchars($producto['imagen_url'] ?? 'default.jpg'); ?>" alt="Imagen Actual" width="100"><br>
                 
-                <label for="imagen_nueva">Cambiar Imagen:</label>
-                <input type="file" id="imagen_nueva" name="imagen_nueva" accept="image/*">
-                <input type="hidden" name="imagen_actual" value="<?php echo htmlspecialchars($producto['imagen']); ?>">
-            </div>
+                <label for="imagen_url">Cambiar Imagen URL:</label>
+                <input type="text" id="imagen_url" name="imagen_url" value="<?php echo htmlspecialchars($producto['imagen_url'] ?? ''); ?>" placeholder="Ej: url_imagen/producto.jpg">
+                </div>
             
             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar Cambios</button>
-            <a href="<?php echo BASE_URL; ?>index.php?c=producto&a=verproducto" class="btn btn-secondary">Cancelar</a>
+            <a href="<?php echo BASE_URL; ?>index.php?c=producto&a=index" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </body>

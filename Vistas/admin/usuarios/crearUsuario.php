@@ -12,7 +12,6 @@ include __DIR__ . '/../dashboard_menu.php';
     <meta charset="UTF-8">
     <title>Crear Usuario</title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/estilos.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/pages/admin-usuarios.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
